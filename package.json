@@ -1,0 +1,21 @@
+{
+  "name": "zack-bot",
+  "version": "1.0.0",
+  "description": "Zack needs to go to sleep. (in Discord)",
+  "main": "client/client.js",
+  "scripts": {
+    "run": "node ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AdamSeidman/Zack-Bot.git"
+  },
+  "author": "Adam Seidman",
+  "license": "MIT",
+  "dependencies": {
+    "@discordjs/voice": "^0.16.0",
+    "discord.js": "^14.9.0",
+    "eslint": "^8.39.0",
+    "tweetnacl": "^1.0.3"
+  }
+}
