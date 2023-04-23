@@ -16,7 +16,9 @@ const myIntents = ['GuildVoiceStates', 'GuildMessages', 'DirectMessages',
 const bot = new Discord.Client({ intents: myIntents })
 bot.login(token)
 
-bot.on('ready')
+bot.on('ready', () => {
+    console.log('Zack Bot Initialized')
+})
 
 bot.on('voiceStateUpdate', (oldState, newState) => {
     if (newState.channel) {
