@@ -7,7 +7,7 @@
 
 const { token, userID } = require('./private')
 const Discord = require('discord.js')
-
+const state = require('../base/state')
 
 // Bot Intentions
 const myIntents = ['GuildVoiceStates', 'GuildMessages', 'DirectMessages',
@@ -21,11 +21,7 @@ bot.on('ready', () => {
 })
 
 bot.on('voiceStateUpdate', (oldState, newState) => {
-    if (newState.channel) {
-        console.log('Connect.')
-    } else {
-        console.log('Disconnect.')
+    if (newState.member.id === userID) {
+        state.update(newState)
     }
-    console.log(oldState)
-    console.log(newState)
 })
