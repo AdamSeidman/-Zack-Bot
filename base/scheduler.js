@@ -20,7 +20,7 @@ var scheduleCheck = function () {
     date.setSeconds(date.getSeconds() + seconds)
     schedule.scheduleJob(date, async () => {
         if (state.isConnected()) {
-            play(state.getChannel())
+            play(state.getChannelId(), state.getGuild())
         }
         scheduleCheck()
     })

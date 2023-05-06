@@ -12,7 +12,7 @@
 var state = undefined
 
 var updateState = function(voiceState) {
-    if (voiceState.channel) {
+    if (voiceState.channelId) {
         state = voiceState
     } else {
         state = undefined
@@ -23,14 +23,21 @@ var isConnected = function() {
     return state !== undefined
 }
 
-var getChannel = function() {
+var getChannelId = function() {
     if (isConnected()) {
-        return state.channel
+        return state.channelId
+    }
+}
+
+var getGuild = function() {
+    if (isConnected()) {
+        return state.guild
     }
 }
 
 module.exports = {
     update: updateState,
     isConnected: isConnected,
-    getChannel: getChannel
+    getChannelId: getChannelId,
+    getGuild: getGuild
 }

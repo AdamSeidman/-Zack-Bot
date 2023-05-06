@@ -24,10 +24,10 @@ fs.readdir(`${dir}`, (err, files) => {
     })
 })
 
-var play = async function (channel) {
+var play = async function (channelId, guild) {
     var soundByte = soundBytes[Math.floor(Math.random() * soundBytes.length)]
 
-    if (soundByte === undefined || channel === undefined || !soundBytes.includes(soundByte)) {
+    if (soundByte === undefined || channelId === undefined || guild === undefined || !soundBytes.includes(soundByte)) {
         console.log('Error in playMusic()')
         return
     }
@@ -41,9 +41,9 @@ var play = async function (channel) {
 
     // Connection to specific channel in guild
     const connection = joinVoiceChannel({
-        channelId: channel.id,
-        guildId: channel.guild.id,
-        adapterCreator: channel.guild.voiceAdapterCreator
+        channelId: channelId,
+        guildId: guild.id,
+        adapterCreator: guild.voiceAdapterCreator
     })
 
     // Create new resource from file
