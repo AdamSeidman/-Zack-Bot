@@ -8,6 +8,7 @@
 const { token, userID } = require('./private')
 const Discord = require('discord.js')
 const state = require('../base/state')
+const { scheduleVoiceEvents } = require('../base/scheduler')
 
 // Bot Intentions
 const myIntents = ['GuildVoiceStates', 'GuildMessages', 'DirectMessages',
@@ -17,6 +18,7 @@ const bot = new Discord.Client({ intents: myIntents })
 bot.login(token)
 
 bot.on('ready', () => {
+    scheduleVoiceEvents()
     console.log('Zack Bot Initialized')
 })
 
