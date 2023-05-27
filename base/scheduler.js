@@ -11,15 +11,16 @@ const schedule = require('node-schedule')
 const state = require('./state')
 const { play } = require('./voice')
 
-const minSeconds = (60 * 15)
-const maxSeconds = (60 * 30)
+const minSeconds = (10 * 60)
+const maxSeconds = (20 * 60)
 
 var scheduleCheck = function () {
     var date = new Date()
     var seconds = minSeconds + Math.ceil(Math.random() * (maxSeconds - minSeconds)) + 1
     date.setSeconds(date.getSeconds() + seconds)
     schedule.scheduleJob(date, async () => {
-        if (state.isConnected()) {
+        let hour = new Date().getHours()
+        if (state.isConnected() && (hour > 22 || hour < 6)) {
             play(state.getChannelId(), state.getGuild())
         }
         scheduleCheck()
