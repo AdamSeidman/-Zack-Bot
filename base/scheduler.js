@@ -21,7 +21,7 @@ var scheduleCheck = function () {
     console.log(date)
     schedule.scheduleJob(date, async () => {
         let hour = new Date().getHours()
-        if (state.isConnected() && (hour > 22 || hour < 6)) {
+        if (state.isConnected() && (hour > 21 || hour < 6)) {
             console.log('Playing...')
             play(state.getChannelId(), state.getGuild())
         }
