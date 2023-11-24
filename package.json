@@ -1,7 +1,7 @@
 {
   "name": "zack-bot",
-  "version": "1.0.0",
-  "description": "Zack needs to go to sleep. (in Discord)",
+  "version": "1.1.0",
+  "description": "Let's lightly bully some Zachs",
   "main": "client/client.js",
   "scripts": {
     "run": "node ."
