@@ -10,6 +10,8 @@
 const schedule = require('node-schedule')
 const state = require('./state')
 const { play } = require('./voice')
+const utils = require('poop-sock')
+const { userIdMessage, weeklyMessage } = require('../client/private')
 
 const minSeconds = (10 * 60)
 const maxSeconds = (20 * 60)
@@ -29,4 +31,20 @@ var scheduleCheck = function () {
     })
 }
 
-module.exports = { scheduleVoiceEvents: scheduleCheck }
+var scheduleMessage = function () {
+    schedule.scheduleJob({hour: 21, minute: 30, second: 30}, async () => {
+        if ((new Date()).getDay() == 5) {
+            // Send message
+            let channel = await utils.getUserById(userIdMessage)
+            if (channel === undefined || weeklyMessage === undefined) {
+                console.log('Could not send weekly message')
+            } else {
+                channel.send(weeklyMessage)
+                console.log('Sent weekly message!')
+            }
+        }
+
+    })
+}
+
+module.exports = { scheduleVoiceEvents: scheduleCheck, scheduleMessage }

@@ -5,11 +5,12 @@
  * 
  */
 
-const { token, userIdVoice, userIdMessage, userIdEmoji, replies } = require('./private')
+const { token, userIdVoice, userIdMessage, userIdEmoji/*, replies*/ } = require('./private')
 const Discord = require('discord.js')
 const state = require('../base/state')
-const { scheduleVoiceEvents } = require('../base/scheduler')
+const { scheduleVoiceEvents, scheduleMessage } = require('../base/scheduler')
 const emoji = require('emoji-dictionary')
+const utils = require('poop-sock')
 
 // Bot Intentions
 const myIntents = ['Guilds', 'GuildVoiceStates', 'GuildMessages', 'DirectMessages',
@@ -22,6 +23,8 @@ bot.login(token)
 
 bot.on('ready', () => {
     scheduleVoiceEvents()
+    scheduleMessage()
+    utils.registerDiscordContext(bot)
     console.log('Zack Bot Initialized')
 })
 
@@ -43,11 +46,18 @@ bot.on('messageCreate', msg => {
         }
     }
 
+    if ( msg.member === null ) {
+        // Log DMs
+        console.log('Received direct message.')
+        console.log(`${msg.author.username}: ${msg.content}`)
+    }
+
     if ( msg.author !== undefined && `${msg.author.id}` === userIdMessage && msg.content.length > 6 ) {
         if ( Math.ceil(Math.random() * 20) === 10 ) {
-            let response = replies[Math.floor(Math.random() * replies.length)]
-            console.log(`Replying to '${msg.content}' with '${response}'`)
-            msg.reply(response)
+            //let response = replies[Math.floor(Math.random() * replies.length)]
+            //console.log(`Replying to '${msg.content}' with '${response}'`)
+            //msg.reply(response)
+            console.log('Not sending reply to message user... (TODO?)')
         }
     }
 })
